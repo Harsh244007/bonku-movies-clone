@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { fetchData } from "../../configs/store/spaceXSlice";
 const SearchForm: React.FC = () => {
   const dispatch = useDispatch();
-  const [movieName, setMovieName] = useState<string>("fast");
+  const [movieName, setMovieName] = useState<string>("omg ");
 
   useEffect(() => {
     {/* @ts-ignore  for vercel deployment*/}
