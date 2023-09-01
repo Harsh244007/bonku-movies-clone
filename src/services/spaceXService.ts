@@ -32,7 +32,5 @@ export const fetchSpaceXData = async (
 
   dataCache[filtersString] = fetchedData;
 
-  localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataCache));
-
   return fetchedData;
 };
