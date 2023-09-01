@@ -87,3 +87,6 @@ body {
 .h-110{
   height: 110px;
 }
+iframe #adddiv{
+  display: none !important;
+}

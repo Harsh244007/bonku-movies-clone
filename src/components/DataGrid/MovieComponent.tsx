@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import Modal from "../Common/Modal";
 
 interface MovieProps {
@@ -10,6 +10,33 @@ interface MovieProps {
 const MovieComponent: React.FC<MovieProps> = ({ title, LockKey, img }) => {
   const [showModal, setShowModal] = useState(false);
   const [embedUrl, setEmbedUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    // @ts-ignore
+    const handleBeforeUnload = (e:any) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+
+    // @ts-ignore
+    const handleLinkClick = (e) => {
+      e.preventDefault();
+    };
+
+    window.addEventListener("beforeunload", handleBeforeUnload);
+
+    const links = document.querySelectorAll("a");
+    links.forEach((link) => {
+      link.addEventListener("click", handleLinkClick);
+    });
+
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload);
+      links.forEach((link) => {
+        link.removeEventListener("click", handleLinkClick);
+      });
+    };
+  }, []);
 
   const handleClick = async () => {
     await fetch(`https://backend-bonku.vercel.app/api/harsh/${LockKey}`, {
