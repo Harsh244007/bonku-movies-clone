@@ -8,18 +8,10 @@ interface MovieProps {
 
 const MovieComponent: React.FC<MovieProps> = ({ title, LockKey, img }) => {
   const handleClick = async () => {
-    const formData = new FormData();
-    formData.append("post", typeof LockKey=="number" ?String(LockKey):LockKey);
-    formData.append("action", "doo_player_ajax");
-    formData.append("type", "movie");
-    formData.append("nume", "streamaly");
-
     //   "https://bonkumovies.com/wp-admin/admin-ajax.php",
-    const response = await fetch(`https://bonkumovies.com/wp-admin/admin-ajax.php`, {
-      method: "POST",
-      body: formData,
+    const response = await fetch(`https://backend-bonku.vercel.app/api/${LockKey}`, {
       headers: {
-        "Access-Control-Allow-Origin": "https://bonkumovies.com"
+        "Access-Control-Allow-Origin": "*"
       },
     })
       .then(async (e) => {
