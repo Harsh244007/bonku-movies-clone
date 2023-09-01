@@ -3,17 +3,23 @@ import Modal from "../Common/Modal";
 
 interface MovieProps {
   title: string;
+  type?: string;
   LockKey: number | string;
   img: string;
 }
 
-const MovieComponent: React.FC<MovieProps> = ({ title, LockKey, img }) => {
+const MovieComponent: React.FC<MovieProps> = ({
+  title,
+  type,
+  LockKey,
+  img,
+}) => {
   const [showModal, setShowModal] = useState(false);
   const [embedUrl, setEmbedUrl] = useState<string | null>(null);
 
   useEffect(() => {
     // @ts-ignore
-    const handleBeforeUnload = (e:any) => {
+    const handleBeforeUnload = (e: any) => {
       e.preventDefault();
       e.returnValue = "";
     };
@@ -39,23 +45,30 @@ const MovieComponent: React.FC<MovieProps> = ({ title, LockKey, img }) => {
   }, []);
 
   const handleClick = async () => {
-    await fetch(`https://backend-bonku.vercel.app/api/harsh/${LockKey}`, {
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-      },
-    })
-      .then(async (e) => {
-        const data = await e.json();
-        setEmbedUrl(data.embed_url);
+    if (type && !type.includes("tvshows")) {
+      await fetch(
+        `https://backend-bonku.vercel.app/api/harsh/movies/${LockKey}`,
+        {
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      )
+        .then(async (e) => {
+          const data = await e.json();
+          setEmbedUrl(data.embed_url);
+          setShowModal(true);
+          return data.embed_url;
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
+    } else {
+      if (type) {
+        setEmbedUrl(type);
         setShowModal(true);
-        return data.embed_url;
-      })
-      .catch((error) => {
-        console.log("Error:", error);
-      })
-      .finally(() => {
-        console.log("data:");
-      });
+      }
+    }
   };
   const closeModal = () => {
     setShowModal(false);

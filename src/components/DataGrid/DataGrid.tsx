@@ -46,6 +46,7 @@ const DataGrid: React.FC = () => {
                     title={item.title}
                     // @ts-ignore
                     LockKey={item.keys && item.keys}
+                    type={item && item.url}
                     img={item.img}
                     // Add any other props you need
                   />
