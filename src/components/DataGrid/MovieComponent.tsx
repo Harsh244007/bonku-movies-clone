@@ -19,7 +19,7 @@ const MovieComponent: React.FC<MovieProps> = ({ title, LockKey, img }) => {
       method: "POST",
       body: formData,
       headers: {
-        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "https://bonkumovies.com"
       },
     })
       .then(async (e) => {
