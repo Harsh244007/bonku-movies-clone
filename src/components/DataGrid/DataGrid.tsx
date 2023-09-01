@@ -3,7 +3,7 @@ import {
   selectSpaceXData,
   selectSpaceXLoading,
 } from "../../configs/store/spaceXSlice";
-import { Capsule } from "../../configs/types/Types";
+import { Movie } from "../../configs/types/Types";
 import { useSelector } from "react-redux";
 import Loading from "../Common/Loading";
 import MovieComponent from "./MovieComponent";
@@ -44,7 +44,8 @@ const DataGrid: React.FC = () => {
                   <MovieComponent
                     key={index}
                     title={item.title}
-                    LockKey={item.keys}
+                    // @ts-ignore
+                    LockKey={item.keys && item.keys}
                     img={item.img}
                     // Add any other props you need
                   />
@@ -60,7 +61,8 @@ const DataGrid: React.FC = () => {
             </div>
           );
         } else if(spaceXData && spaceXData[0] =="no_posts") {
-          return <p>{spaceXData[1]}</p>;
+          // @ts-ignore
+          return <p>{spaceXData && spaceXData[1]}</p>;
         }else  {
           return <Loading />;
         }

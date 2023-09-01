@@ -1,13 +1,13 @@
-import { Capsule } from "../configs/types/Types";
+import { Movie } from "../configs/types/Types";
 
 const LOCAL_STORAGE_KEY = "localstoredspacexdata";
-const dataCache: Record<string, Capsule[]> = JSON.parse(
+const dataCache: Record<string, Movie[]> = JSON.parse(
   localStorage.getItem(LOCAL_STORAGE_KEY) || "{}"
 );
 
 export const fetchSpaceXData = async (
   string: string
-): Promise<Capsule[]> => {
+): Promise<Movie[]> => {
   const filtersString: string = JSON.stringify(string);
 
   if (dataCache[filtersString]) {

@@ -7,7 +7,7 @@ export interface Movie  {
   title: string;
   url: string;
   img: string;
-  key?:number;
+  keys?:number | string;
   extra?: {
     date: string;
     imdb?: string | boolean;
@@ -30,5 +30,5 @@ export interface ModalProps {
   onClose:(event: React.MouseEvent<HTMLDivElement, MouseEvent>)  => void;
 }
 export interface DataGridItemProps {
-  item: Capsule;
+  item: Movie;
 }

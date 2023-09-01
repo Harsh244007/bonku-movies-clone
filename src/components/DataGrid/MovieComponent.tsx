@@ -2,14 +2,14 @@ import React, { memo } from "react";
 
 interface MovieProps {
   title: string;
-  LockKey: string;
+  LockKey: number | string;
   img: string;
 }
 
 const MovieComponent: React.FC<MovieProps> = ({ title, LockKey, img }) => {
   const handleClick = async () => {
     const formData = new FormData();
-    formData.append("post", LockKey);
+    formData.append("post", typeof LockKey=="number" ?String(LockKey):LockKey);
     formData.append("action", "doo_player_ajax");
     formData.append("type", "movie");
     formData.append("nume", "streamaly");

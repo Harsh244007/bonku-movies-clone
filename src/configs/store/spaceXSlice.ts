@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { fetchSpaceXData } from "../../services/spaceXService";
 import { RootState } from "./store";
-import { Capsule } from "../types/Types";
 
 interface SpaceXState {
   data: unknown[];
