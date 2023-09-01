@@ -1,4 +1,5 @@
-import React, { memo } from "react";
+import React, { memo, useState } from "react";
+import Modal from "../Common/Modal";
 
 interface MovieProps {
   title: string;
@@ -7,17 +8,20 @@ interface MovieProps {
 }
 
 const MovieComponent: React.FC<MovieProps> = ({ title, LockKey, img }) => {
+  const [showModal, setShowModal] = useState(false);
+  const [embedUrl, setEmbedUrl] = useState<string | null>(null);
+
   const handleClick = async () => {
-    //   "https://bonkumovies.com/wp-admin/admin-ajax.php",
-    const response = await fetch(`https://backend-bonku.vercel.app/api/harsh/${LockKey}`, {
+    await fetch(`https://backend-bonku.vercel.app/api/harsh/${LockKey}`, {
       headers: {
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Origin": "*",
       },
     })
       .then(async (e) => {
         const data = await e.json();
-        console.log("Response data:", response, data);
-        return data;
+        setEmbedUrl(data.embed_url);
+        setShowModal(true);
+        return data.embed_url;
       })
       .catch((error) => {
         console.log("Error:", error);
@@ -26,6 +30,11 @@ const MovieComponent: React.FC<MovieProps> = ({ title, LockKey, img }) => {
         console.log("data:");
       });
   };
+  const closeModal = () => {
+    setShowModal(false);
+    setEmbedUrl(null);
+  };
+
   return (
     <div
       tabIndex={0}
@@ -47,6 +56,20 @@ const MovieComponent: React.FC<MovieProps> = ({ title, LockKey, img }) => {
           Play Now
         </button>
       </div>
+
+      {showModal && (
+        <Modal onClose={closeModal}>
+          {embedUrl && (
+            <iframe
+              src={embedUrl}
+              width="100%"
+              height="100%"
+              title="Embedded Content"
+            />
+          )}
+        </Modal>
+      )}
+
     </div>
   );
 };
