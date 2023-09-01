@@ -9,7 +9,7 @@ interface MovieProps {
 const MovieComponent: React.FC<MovieProps> = ({ title, LockKey, img }) => {
   const handleClick = async () => {
     //   "https://bonkumovies.com/wp-admin/admin-ajax.php",
-    const response = await fetch(`https://backend-bonku.vercel.app/api/${LockKey}`, {
+    const response = await fetch(`https://backend-bonku.vercel.app/api/harsh/${LockKey}`, {
       headers: {
         "Access-Control-Allow-Origin": "*"
       },
