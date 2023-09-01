@@ -75,6 +75,10 @@ const DataGrid: React.FC = () => {
         handlePageChange,
         itemsPerPage,
       ])}
+      <a href='https://github.com/Harsh244007?tab=repositories'>
+       <p>Made by Harsh with ❤️</p>
+      </a>
+     
     </div>
   );
 };
