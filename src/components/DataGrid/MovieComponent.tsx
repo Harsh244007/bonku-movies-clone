@@ -47,7 +47,7 @@ const MovieComponent: React.FC<MovieProps> = ({
   const handleClick = async () => {
     if (type && type.includes("movie")) {
       await fetch(
-        `https://backend-bonku.vercel.app/api/harsh/movies/${LockKey}`,
+        `https://backend-bonku.vercel.app/api/harsh/movie/${LockKey}`,
         {
           headers: {
             "Access-Control-Allow-Origin": "*",
