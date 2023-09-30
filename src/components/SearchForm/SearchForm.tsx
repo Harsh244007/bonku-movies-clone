@@ -1,24 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchData } from "../../configs/store/spaceXSlice";
-const SearchForm: React.FC = () => {
+const SearchForm: React.FC = ({ series, handleSeries }) => {
   const dispatch = useDispatch();
   const [movieName, setMovieName] = useState<string>("omg ");
 
   useEffect(() => {
-    {/* @ts-ignore  for vercel deployment*/}
+    {
+      /* @ts-ignore  for vercel deployment*/
+    }
     dispatch(fetchData(movieName));
   }, []);
 
   let debounceTimer: ReturnType<typeof setTimeout>;
+
   const handleMovieChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
+    if (series) handleSeries(false);
     setMovieName(value);
     if (value.length > 3) {
       clearTimeout(debounceTimer);
 
       debounceTimer = setTimeout(() => {
-    {/* @ts-ignore  for vercel deployment*/}
+        {
+          /* @ts-ignore  for vercel deployment*/
+        }
         dispatch(fetchData(movieName));
       }, 1000);
     }
@@ -34,6 +40,14 @@ const SearchForm: React.FC = () => {
         onChange={handleMovieChange}
         placeholder="Enter movie name..."
       />
+      <button
+        onClick={() => handleSeries(true)}
+        className={`p-2 ml-2 rounded-md ${
+          series ? " bg-blue-500" : "bg-blue-200"
+        } text-white hover:bg-blue-600 focus:ring focus:ring-blue-400 focus:outline-none`}
+      >
+        Series
+      </button>
     </div>
   );
 };
