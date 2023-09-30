@@ -71,7 +71,7 @@ const SeriesComponent: React.FC<SeriesComponentProps> = ({ seriesData }) => {
               selectedSesession
             ].map((episode, index) => ({
               value: index,
-              label: `Episode No. ${index + 1} ${episode}`,
+              label: `Episode No. ${index + 1} `,
             }))}
             value={selectedEpisodeIndex}
             onChange={handleEpisodeChange}
