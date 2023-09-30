@@ -29,7 +29,7 @@ const SearchForm: React.FC = ({ series, handleSeries }) => {
   };
 
   return (
-    <div className="flex flex-wrap justify-evenly items-center bg-gray-200 p-4">
+    <div className="flex flex-wrap gap-10 justify-evenly items-center bg-gray-200 p-4">
       <input
         type="text"
         tabIndex={0}
