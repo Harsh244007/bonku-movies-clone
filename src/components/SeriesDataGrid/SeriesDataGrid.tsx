@@ -34,6 +34,7 @@ const SeriesComponent: React.FC<SeriesComponentProps> = ({ seriesData }) => {
     );
     setShowModal(true);
   };
+
   const closeModal = () => {
     setShowModal(false);
     setEmbedUrl(null);
@@ -71,7 +72,7 @@ const SeriesComponent: React.FC<SeriesComponentProps> = ({ seriesData }) => {
               selectedSesession
             ].map((episode, index) => ({
               value: index,
-              label: `Episode No. ${index + 1} `,
+              label: `Episode No. ${episode} `,
             }))}
             value={selectedEpisodeIndex}
             onChange={handleEpisodeChange}
@@ -91,6 +92,8 @@ const SeriesComponent: React.FC<SeriesComponentProps> = ({ seriesData }) => {
             <iframe
               src={embedUrl}
               width="100%"
+              className="iframe"
+              sandbox="allow-same-origin allow-scripts"
               height="100%"
               title="Embedded Content"
             />
