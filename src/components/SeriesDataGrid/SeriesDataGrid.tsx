@@ -93,7 +93,7 @@ const SeriesComponent: React.FC<SeriesComponentProps> = ({ seriesData }) => {
               src={embedUrl}
               width="100%"
               className="iframe"
-              sandbox="allow-same-origin allow-scripts"
+              
               height="100%"
               title="Embedded Content"
             />
