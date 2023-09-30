@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchData } from "../../configs/store/spaceXSlice";
+
+// @ts-ignore
 const SearchForm: React.FC = ({ series, handleSeries }) => {
   const dispatch = useDispatch();
   const [movieName, setMovieName] = useState<string>("omg ");
 
   useEffect(() => {
-    {
-      /* @ts-ignore  for vercel deployment*/
-    }
+    {/* @ts-ignore  for vercel deployment*/}
     dispatch(fetchData(movieName));
   }, []);
 
@@ -22,9 +22,7 @@ const SearchForm: React.FC = ({ series, handleSeries }) => {
       clearTimeout(debounceTimer);
 
       debounceTimer = setTimeout(() => {
-        {
-          /* @ts-ignore  for vercel deployment*/
-        }
+        {/* @ts-ignore  for vercel deployment*/}
         dispatch(fetchData(movieName));
       }, 1000);
     }

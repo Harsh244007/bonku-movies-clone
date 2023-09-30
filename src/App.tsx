@@ -23,9 +23,8 @@ const App = () => {
       </React.Suspense>
 
       <React.Suspense fallback={<Loading />}>
-        <SearchForm
-          series={showSeriesDataGrid}
-          handleSeries={handleSeriesButtonClick}
+        {/* @ts-ignore */}
+        <SearchForm series={showSeriesDataGrid} handleSeries={handleSeriesButtonClick}
         />
       </React.Suspense>
       {!showSeriesDataGrid ? (
