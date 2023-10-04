@@ -6,33 +6,51 @@ interface SeriesComponentProps {
   seriesData: { title: string; imdb: string; series: number[][] }[];
 }
 
+const localStorageObj = {
+  nameIndex: 0,
+  seriesIndex: 0,
+  episodeIndex: 0,
+};
+
 const SeriesComponent: React.FC<SeriesComponentProps> = ({ seriesData }) => {
-  const [selectedSeriesIndex, setSelectedSeriesIndex] = useState<number>(0);
-  const [selectedSesession, setSelectedSesession] = useState<number>(0);
-  const [selectedEpisodeIndex, setSelectedEpisodeIndex] = useState<number>(0);
+  const unparsedLocalStorageObj = localStorage.getItem("seriesDetails");
+  const parsedLocalStorageObj = unparsedLocalStorageObj ? JSON.parse(unparsedLocalStorageObj) : null;
+    const [selectedNameIndex, setSelectedNameIndex] = useState<number>(
+    parsedLocalStorageObj && parsedLocalStorageObj.nameIndex ? Number(parsedLocalStorageObj.nameIndex) : 0
+  );
+  const [selectedSesession, setSelectedSesession] = useState<number>(
+    parsedLocalStorageObj && parsedLocalStorageObj.seriesIndex ? Number(parsedLocalStorageObj.seriesIndex) : 0
+  );
+  const [selectedEpisodeIndex, setSelectedEpisodeIndex] = useState<number>(
+    parsedLocalStorageObj && parsedLocalStorageObj.episodeIndex ? Number(parsedLocalStorageObj.episodeIndex) : 0
+  );
   const [showModal, setShowModal] = useState(false);
   const [embedUrl, setEmbedUrl] = useState<string | null>(null);
 
-  const handleSeriesChange = (index: number) => {
-    setSelectedSeriesIndex(index);
-
-    setSelectedEpisodeIndex(0); // Reset the episode selection when series changes
+  const handleNameChange = (index: number) => {
+    setSelectedNameIndex(index);
+    localStorageObj["nameIndex"] = index;
+    localStorageObj["seriesIndex"] = 0;
+    localStorageObj["episodeIndex"] = 0;
+    setSelectedEpisodeIndex(0);
+    setSelectedSesession(0);
   };
 
   const handleEpisodeChange = (index: number) => {
     setSelectedEpisodeIndex(index);
+    localStorageObj["episodeIndex"] = index;
   };
   const handleSessionChange = (index: number) => {
     setSelectedSesession(index);
+    localStorageObj["nameIndex"] = index;
+    setSelectedEpisodeIndex(0);
+    localStorageObj["episodeIndex"] = 0;
   };
 
   const handleWatchClick = () => {
-    setEmbedUrl(
-      `https://autoembed.to/tv/imdb/${seriesData[selectedSeriesIndex].imdb}-${
-        selectedSesession + 1
-      }-${selectedEpisodeIndex + 1}`
-    );
+    setEmbedUrl(`https://autoembed.to/tv/imdb/${seriesData[selectedNameIndex].imdb}-${selectedSesession + 1}-${selectedEpisodeIndex + 1}`);
     setShowModal(true);
+    localStorage.setItem("seriesDetails", JSON.stringify(localStorageObj));
   };
 
   const closeModal = () => {
@@ -50,15 +68,15 @@ const SeriesComponent: React.FC<SeriesComponentProps> = ({ seriesData }) => {
           value: index,
           label: series.title,
         }))}
-        value={selectedSeriesIndex}
-        onChange={handleSeriesChange}
+        value={selectedNameIndex}
+        onChange={handleNameChange}
       />
 
       {seriesData.length > 0 && (
         <div>
           <DropdownSelect
             label="Select Series"
-            options={seriesData[selectedSeriesIndex].series.map((_, index) => ({
+            options={seriesData[selectedNameIndex].series.map((_, index) => ({
               value: index,
               label: `Session ${index + 1}`,
             }))}
@@ -68,9 +86,7 @@ const SeriesComponent: React.FC<SeriesComponentProps> = ({ seriesData }) => {
 
           <DropdownSelect
             label="Select Episode"
-            options={seriesData[selectedSeriesIndex].series[
-              selectedSesession
-            ].map((episode, index) => ({
+            options={seriesData[selectedNameIndex].series[selectedSesession].map((episode, index) => ({
               value: index,
               label: `Episode No. ${episode} `,
             }))}
@@ -89,14 +105,7 @@ const SeriesComponent: React.FC<SeriesComponentProps> = ({ seriesData }) => {
       {showModal && (
         <Modal onClose={closeModal}>
           {embedUrl && (
-            <iframe
-              src={embedUrl}
-              width="100%"
-              className="iframe"
-              sandbox="allow-same-origin allow-scripts"
-              height="100%"
-              title="Embedded Content"
-            />
+            <iframe src={embedUrl} width="100%" className="iframe" sandbox="allow-same-origin allow-scripts" height="100%" title="Embedded Content" />
           )}
         </Modal>
       )}
@@ -104,4 +113,4 @@ const SeriesComponent: React.FC<SeriesComponentProps> = ({ seriesData }) => {
   );
 };
 
-export default SeriesComponent;
+export default React.memo(SeriesComponent);
