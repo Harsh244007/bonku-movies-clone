@@ -105,7 +105,13 @@ const SeriesComponent: React.FC<SeriesComponentProps> = ({ seriesData }) => {
       {showModal && (
         <Modal onClose={closeModal}>
           {embedUrl && (
-            <iframe src={embedUrl} width="100%" className="iframe" sandbox="allow-same-origin allow-scripts" height="100%" title="Embedded Content" />
+            <iframe
+              src={embedUrl}
+              width="100%"
+              className="iframe"
+              height="100%"
+              title="Embedded Content"
+            />
           )}
         </Modal>
       )}

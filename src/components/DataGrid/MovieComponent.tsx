@@ -103,7 +103,6 @@ const MovieComponent: React.FC<MovieProps> = ({
             <iframe
               src={embedUrl}
               width="100%"
-              sandbox="allow-same-origin allow-scripts"
               height="100%"
               title="Embedded Content"
             />
