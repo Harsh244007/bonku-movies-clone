@@ -71,9 +71,7 @@ body {
   position: relative;
   margin: auto;
 }
-iframe {
-  transform: rotate(90deg);
-}
+
 @media (max-width: 1022px) {
   #root {
     padding: 1rem;
