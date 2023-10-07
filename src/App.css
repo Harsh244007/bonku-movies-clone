@@ -48,7 +48,6 @@ body {
   color: black;
   height: 100vh;
 }
-
 .modal-overlay {
   position: fixed;
   top: 0;
@@ -71,6 +70,9 @@ body {
   height: 60%;
   position: relative;
   margin: auto;
+}
+iframe {
+  transform: rotate(90deg);
 }
 @media (max-width: 1022px) {
   #root {
