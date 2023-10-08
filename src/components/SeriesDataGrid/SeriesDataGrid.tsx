@@ -16,13 +16,13 @@ const SeriesComponent: React.FC<SeriesComponentProps> = ({ seriesData }) => {
   const unparsedLocalStorageObj = localStorage.getItem("seriesDetails");
   const parsedLocalStorageObj = unparsedLocalStorageObj ? JSON.parse(unparsedLocalStorageObj) : null;
     const [selectedNameIndex, setSelectedNameIndex] = useState<number>(
-    parsedLocalStorageObj && parsedLocalStorageObj.nameIndex ? Number(parsedLocalStorageObj.nameIndex) : 0
+    parsedLocalStorageObj && parsedLocalStorageObj.nameIndex && seriesData[parsedLocalStorageObj.nameIndex] ? Number(parsedLocalStorageObj.nameIndex) : 0
   );
   const [selectedSesession, setSelectedSesession] = useState<number>(
-    parsedLocalStorageObj && parsedLocalStorageObj.seriesIndex ? Number(parsedLocalStorageObj.seriesIndex) : 0
+    parsedLocalStorageObj && parsedLocalStorageObj.seriesIndex && seriesData[parsedLocalStorageObj.nameIndex] && seriesData[parsedLocalStorageObj.nameIndex].series && seriesData[parsedLocalStorageObj.nameIndex].series[parsedLocalStorageObj.seriesIndex] ? Number(parsedLocalStorageObj.seriesIndex) : 0
   );
   const [selectedEpisodeIndex, setSelectedEpisodeIndex] = useState<number>(
-    parsedLocalStorageObj && parsedLocalStorageObj.episodeIndex ? Number(parsedLocalStorageObj.episodeIndex) : 0
+    parsedLocalStorageObj && parsedLocalStorageObj.episodeIndex  && seriesData[parsedLocalStorageObj.nameIndex] && seriesData[parsedLocalStorageObj.nameIndex].series && seriesData[parsedLocalStorageObj.nameIndex].series[parsedLocalStorageObj.seriesIndex] && seriesData[parsedLocalStorageObj.nameIndex].series[parsedLocalStorageObj.seriesIndex][parsedLocalStorageObj.episodeIndex] ? Number(parsedLocalStorageObj.episodeIndex) : 0
   );
   const [showModal, setShowModal] = useState(false);
   const [embedUrl, setEmbedUrl] = useState<string | null>(null);
