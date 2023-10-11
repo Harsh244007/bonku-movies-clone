@@ -4,7 +4,9 @@ import { ModalProps } from "../../configs/types/Types";
 
 const Modal: React.FC<ModalProps> = ({ children, onClose }) => {
   const modalRoot: HTMLElement | null = document.getElementById("modal-root");
-
+  function debugger(){
+  }
+  debugger()
   return modalRoot
     ? ReactDOM.createPortal(
         <div className="modal-overlay" onClick={onClose}>
