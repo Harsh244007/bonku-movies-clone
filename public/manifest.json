@@ -1,0 +1,49 @@
+{
+  "background_color": "#ffffff",
+  "description": "Watch any movies from phone.",
+  "dir": "ltr",
+  "id": "29",
+  "display": "standalone",
+  "name": "Bonku Movies",
+  "orientation": "portrait",
+  "capture_links": "existing_client_event",
+  "handle_links": "auto",
+  "url_handlers": [{ "origin": "/" }],
+  "scope": "/",
+  "short_name": "Bonku Movies",
+  "start_url": ".",
+  "theme_color": "#111928",
+  "categories": ["business"],
+  "screenshots": [],
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "type": "image/webp",
+      "sizes": "144x144",
+      "purpose": "any"
+    },
+    {
+      "src": "/vite.svg",
+      "type": "image/jpg",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/vite.svg",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "/vite.svg",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/vite.svg",
+      "type": "image/x-icon"
+    }
+  ],
+  "shortcuts": []
+}

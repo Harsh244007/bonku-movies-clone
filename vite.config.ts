@@ -1,11 +1,9 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
+import { VitePWA } from 'vite-plugin-pwa';
 
-// dns.setDefaultResultOrder('verbatim')
-
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), VitePWA({ registerType: 'autoUpdate' })],
   server: {
     host: true,
     port: 5173,
@@ -18,6 +16,5 @@ export default defineConfig({
     },
   },
 });
-// target: "https://bonkumovies.com/wp-admin/admin-ajax.php", // Target URL (the external domain)
 
 

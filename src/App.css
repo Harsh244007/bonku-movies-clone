@@ -90,3 +90,6 @@ body {
 iframe #adddiv{
   display: none !important;
 }
+#addiv,iframe * #addiv{
+  display: none !important;
+}
